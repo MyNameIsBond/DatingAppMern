@@ -11,22 +11,37 @@ export default class Chat extends Component {
     return (
       <div class="body">
         <div class="user">
-          <div class="userConainer">
-            <div class="userInfoContainer">
-              <Person />
-              <p>{this.props.username}</p>
+          <div class="userInfo">
+            <div class="userConainer">
+              <div class="userInfoContainer">
+                <Person />
+                <p>{this.props.username}</p>
+              </div>
+            </div>
+            <div class="searchContainer">
+              <div class="inputContainer">
+                <Search fontSize="small" />
+                <input type="text" />
+              </div>
             </div>
           </div>
-          <div class="searchContainer">
-            <div class="inputContainer">
-              <Search fontSize="small" />
-              <input type="text" />
+          <div class="usersOnlineDiv">
+            <div class="usersOnline">
+              <img src={require('../photos/userPic.png')} />
+              <div>
+                <h4 class="chatName">Dolores La Flipo</h4>
+                <p class="chatMessage">Hello there</p>
+              </div>
             </div>
           </div>
-          <div class="usersOnline">
-            <img src={require('../photos/userPic.png')} />
-
-            <p>Hey love</p>
+          <div class="usersOnlineDiv">
+            <div class="usersOnline">
+              <img src={require('../photos/userPic.png')} />
+              <div>
+                <h4 class="chatName">Dolores La Flipo</h4>
+                <p class="chatMessage">Hello there</p>
+              </div>
+            </div>
           </div>
         </div>
         {/* Chat Grid */}
