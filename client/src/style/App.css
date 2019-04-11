@@ -1,0 +1,90 @@
+:root {
+  --bgColour: #939baa;
+  --normalTextColour: #992323;
+  --boxShadow1: 0 2px 2px rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  --boader: lightgray;
+}
+
+.usernameDiv {
+  margin: 300px auto;
+  width: 225px;
+  text-align: center;
+}
+.usernameDiv h2 {
+  color: var(--normalTextColour);
+}
+.usernameDiv input {
+  color: var(--normalTextColour);
+  padding: 10px;
+  width: 200px;
+}
+
+.usernameDiv input:focus {
+  outline: none;
+}
+
+.inputDiv {
+  box-shadow: var(--boxShadow1);
+}
+
+body {
+  background-color: var(--bgColour);
+}
+.body {
+  display: grid;
+  min-height: 100%;
+  min-width: 200px;
+  height: 100vh;
+  grid-template-columns: 35% 65%;
+}
+/* User */
+.user {
+  height: 100%;
+  padding: 0px 10px;
+  background-color: rgb(202, 188, 188);
+  border: 1px solid var(--boader);
+}
+.usersOnline {
+  display: grid;
+  grid-template-columns: 25% 75%;
+}
+
+/* Search */
+input:focus {
+  outline: none;
+}
+.searchContainer {
+  display: inline-block;
+  width: 100%;
+  padding: 15px 0px;
+}
+.searchContainer input {
+  border: none;
+  width: 100%;
+  padding: 8px 25px;
+  border-radius: 25px;
+  box-sizing: border-box;
+}
+.inputContainer {
+  position: relative;
+}
+.inputContainer svg {
+  position: absolute;
+  padding: 5px 5px;
+}
+
+/*  Users Info */
+
+.userConainer {
+  margin: 10px 0px;
+}
+.userInfoContainer svg {
+  position: absolute;
+  padding: 0px 10px;
+}
+
+.usersOnline img {
+  height: 80px;
+  width: 80px;
+}
