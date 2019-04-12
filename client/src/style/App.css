@@ -1,12 +1,13 @@
 :root {
   --bgColour: #ebebeb;
-  --normalTextColour: #221d1d;
+  --normalTextColour: #424244;
   --boxShadow1: 0 2px 2px rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
   --boader: lightgray;
   --hoverColour: lightgray;
   --lightText: rgb(161, 161, 161);
   --iconColour: rgb(72, 85, 90);
+  --decorationColor: red;
 }
 .usernameDiv {
   margin: 300px auto;
@@ -37,16 +38,19 @@ body {
 
 .body {
   display: grid;
-  min-height: 100%;
-  min-width: 200px;
-  height: 100vh;
-  grid-template-columns: minmax(400px, 35%) 65%;
+  /* min-height: 100%;
+  min-width: 100%;
+  max-width: 100%; */
+  /* height: 100vh; */
+  grid-template-columns: minmax(400px, 35%) minmax(400px, 65%);
 }
+
 /* User */
 .user {
-  height: 100%;
+  height: 100vh;
   padding: 0px 0px;
   border: 1px solid var(--boader);
+  grid-column: span 1;
 }
 
 .usersOnline {
@@ -70,25 +74,31 @@ body {
 input:focus {
   outline: none;
 }
+
 .searchContainer {
   display: inline-block;
   width: 100%;
   padding: 15px 0px;
 }
+
 .searchContainer input {
   border: none;
   width: 100%;
   padding: 8px 25px;
   border-radius: 25px;
   box-sizing: border-box;
+  color: var(--normalTextColour);
 }
+
 .inputContainer {
   position: relative;
 }
+
 .inputContainer svg {
   position: absolute;
   padding: 6px 5px;
 }
+
 svg {
   color: var(--iconColour);
 }
@@ -98,9 +108,11 @@ svg {
 .userConainer {
   margin: 10px 20px;
 }
+
 .userInfoContainer svg {
   position: absolute;
 }
+
 .userInfoContainer p {
   color: var(--normalTextColour);
   padding: 0px 25px;
@@ -119,4 +131,48 @@ svg {
 .chatMessage {
   font-size: 15px;
   color: var(--lightText);
+}
+
+/* Chat Greid */
+.chatGrid {
+  grid-column: span 1;
+  background-color: var(--bgColour);
+}
+
+.sendMessage {
+  grid-column: span 1;
+  position: fixed;
+  background-color: red;
+  bottom: 0px;
+  width: 100%;
+  height: 60px;
+  border-top: solid 1px var(--boader);
+}
+
+.sendMessage input {
+  height: 100%;
+  width: 58%;
+  padding: 0px 10px 0px 10px;
+  color: var(--normalTextColour);
+  box-sizing: border-box;
+  background-color: var(--bgColour);
+  border: solid 0px;
+  font-size: 18px;
+}
+.sendMessage button:hover {
+  cursor: pointer;
+}
+.sendMessage button {
+  height: inherit;
+  position: fixed;
+  right: 0px;
+  width: 135px;
+  border: solid 0px;
+  padding: auto 0px;
+  background-color: var(--decorationColor);
+  color: var(--lightText);
+}
+.sendMessage button:disabled {
+  background-color: var(--boader);
+  cursor: default;
 }
