@@ -68,6 +68,7 @@ body {
 
 .usersOnline:hover {
   background-color: var(--hoverColour);
+  border-right: solid 3px red;
 }
 
 /* Search */
