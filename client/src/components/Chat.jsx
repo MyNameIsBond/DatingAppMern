@@ -38,9 +38,11 @@ export default class Chat extends Component {
     const { messages } = this.state
     console.log(messages)
     const mes = messages.map(message => (
-      <div>
-        <p> {message.sender}</p>
+      <div class="messageDiv">
+        <img src={require('../photos/userPic.png')} alt="lol" />
+        {/* <p> {message.sender}</p> */}
         <p> {message.message}</p>
+        <small> {message.date}</small>
       </div>
     ))
     return mes
@@ -53,7 +55,11 @@ export default class Chat extends Component {
   }
   sendMessage = message => {
     const { username } = this.state
-    socket.emit('messages', { sender: username, message: message })
+    const currentDate = new Date()
+    const hour = currentDate.getHours()
+    const minute = currentDate.getMinutes()
+    const datee = `${hour}:${minute}`
+    socket.emit('messages', { sender: username, message: message, date: datee })
     this.setState({ message: '' })
   }
 
@@ -98,13 +104,16 @@ export default class Chat extends Component {
         <div class="chatGrid">
           <div class="chatInfo">
             <div class="infoIconDiv">
+              <div class="userChatInfo">
+                <img src={require('../photos/userPic.png')} alt="lol" />
+                <p>James Bond</p>
+              </div>
               <CameraAlt onClick={this.camera} />
               <Videocam onClick={this.video} />
             </div>
           </div>
           <div class="messageInfo" />
           <this.Messages />
-          <div>Dolores La Flipe</div>
           <div class="sendMessage">
             <input
               type="text"

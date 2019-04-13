@@ -8,6 +8,10 @@
   --lightText: rgb(161, 161, 161);
   --iconColour: rgb(72, 85, 90);
   --decorationColor: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff);
+  --bigFont: 20px;
+}
+#root {
+  overflow-x: hidden;
 }
 .usernameDiv {
   margin: 300px auto;
@@ -47,6 +51,7 @@ body {
 
 /* User */
 .user {
+  position: fixed;
   height: 100vh;
   padding: 0px 0px;
   border: 1px solid var(--boader);
@@ -60,7 +65,7 @@ body {
 }
 
 .userInfo {
-  padding: 0px 10px;
+  padding: 0px 0px 0px 0px;
   border-bottom-color: var(--boader);
   border-bottom-style: solid;
   border-bottom-width: 1px;
@@ -159,13 +164,13 @@ svg {
   box-sizing: border-box;
   background-color: var(--bgColour);
   border: solid 0px;
-  font-size: 20px;
+  font-size: var(--bigFont);
 }
 .sendMessage button:hover {
   cursor: pointer;
 }
 .sendMessage button {
-  font-size: 20px;
+  font-size: var(--bigFont);
   height: inherit;
   position: fixed;
   right: 0px;
@@ -182,6 +187,8 @@ svg {
 }
 
 .chatInfo {
+  position: fixed;
+  width: 65%;
   height: 60px;
   box-shadow: var(--boxShadow1);
   background: var(--decorationColor);
@@ -194,9 +201,43 @@ svg {
 .chatInfo svg {
   text-align: right;
   font-size: 30px;
-  padding: 15px 5px;
+  padding: 15px 30px;
 }
 .chatInfo svg:hover {
   cursor: pointer;
   background-color: var(--hoverColour);
+}
+.userChatInfo p {
+  margin-top: 15px;
+  color: var(--bgColour);
+  padding-left: 70px;
+  font-size: var(--bigFont);
+}
+.userChatInfo img {
+  height: 50px;
+  padding-top: 5px;
+  padding-right: 10px;
+  margin-right: 10px;
+  width: auto;
+  position: absolute;
+}
+.userChatInfo {
+  float: left;
+  padding-right: 200px;
+}
+
+.messageDiv {
+  display: grid;
+  width: 300px;
+  grid-template-columns: auto 80% 20%;
+  padding: 20px;
+  background-color: red;
+}
+.messageDiv p {
+  background-color: green;
+}
+
+.messageDiv img {
+  height: 50px;
+  width: auto;
 }
