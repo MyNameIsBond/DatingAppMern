@@ -7,7 +7,7 @@
   --hoverColour: lightgray;
   --lightText: rgb(161, 161, 161);
   --iconColour: rgb(72, 85, 90);
-  --decorationColor: red;
+  --decorationColor: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff);
 }
 .usernameDiv {
   margin: 300px auto;
@@ -68,7 +68,8 @@ body {
 
 .usersOnline:hover {
   background-color: var(--hoverColour);
-  border-right: solid 3px red;
+  border-right: solid 3px orange;
+  box-shadow: var(--boxShadow1);
 }
 
 /* Search */
@@ -134,7 +135,7 @@ svg {
   color: var(--lightText);
 }
 
-/* Chat Greid */
+/* Chat Grid */
 .chatGrid {
   grid-column: span 1;
   background-color: var(--bgColour);
@@ -158,22 +159,44 @@ svg {
   box-sizing: border-box;
   background-color: var(--bgColour);
   border: solid 0px;
-  font-size: 18px;
+  font-size: 20px;
 }
 .sendMessage button:hover {
   cursor: pointer;
 }
 .sendMessage button {
+  font-size: 20px;
   height: inherit;
   position: fixed;
   right: 0px;
   width: 135px;
   border: solid 0px;
   padding: auto 0px;
-  background-color: var(--decorationColor);
-  color: var(--lightText);
+  background: var(--decorationColor);
+  color: var(--bgColour);
 }
 .sendMessage button:disabled {
-  background-color: var(--boader);
+  background: var(--boader);
   cursor: default;
+  color: var(--iconColour);
+}
+
+.chatInfo {
+  height: 60px;
+  box-shadow: var(--boxShadow1);
+  background: var(--decorationColor);
+}
+
+/* Info Grid */
+.infoIconDiv {
+  float: right;
+}
+.chatInfo svg {
+  text-align: right;
+  font-size: 30px;
+  padding: 15px 5px;
+}
+.chatInfo svg:hover {
+  cursor: pointer;
+  background-color: var(--hoverColour);
 }

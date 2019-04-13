@@ -15,5 +15,10 @@ app.get('/', (req, res) => {
 })
 
 io.on('connection', socket => {
-  console.log(socket.id)
+  socket.on('newUser', data => {
+    socket.broadcast.emit(data)
+  })
+  socket.on('messages', data => {
+    io.sockets.emit('messages', data)
+  })
 })
