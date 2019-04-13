@@ -52,6 +52,7 @@ body {
 /* User */
 .user {
   position: fixed;
+  /* lol  */
   height: 100vh;
   padding: 0px 0px;
   border: 1px solid var(--boader);
