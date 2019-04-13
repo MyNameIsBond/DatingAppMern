@@ -75,27 +75,29 @@ export default class Chat extends Component {
     const { message } = this.state
     return (
       <div class="body">
-        <div class="user">
-          <div class="userInfo">
-            <div class="userConainer">
-              <div class="userInfoContainer">
-                <Person />
-                <p>{this.props.username}</p>
+        <div class="userDiv">
+          <div class="user">
+            <div class="userInfo">
+              <div class="userConainer">
+                <div class="userInfoContainer">
+                  <Person />
+                  <p>{this.props.username}</p>
+                </div>
+              </div>
+              <div class="searchContainer">
+                <div class="inputContainer">
+                  <Search fontSize="small" />
+                  <input type="text" />
+                </div>
               </div>
             </div>
-            <div class="searchContainer">
-              <div class="inputContainer">
-                <Search fontSize="small" />
-                <input type="text" />
-              </div>
-            </div>
-          </div>
-          <div class="usersOnlineDiv">
-            <div class="usersOnline">
-              <img src={require('../photos/userPic.png')} alt="lol" />
-              <div>
-                <h4 class="chatName">Dolores La Flipo</h4>
-                <p class="chatMessage">Hello there</p>
+            <div class="usersOnlineDiv">
+              <div class="usersOnline">
+                <img src={require('../photos/userPic.png')} alt="lol" />
+                <div>
+                  <h4 class="chatName">Dolores La Flipo</h4>
+                  <p class="chatMessage">Hello there</p>
+                </div>
               </div>
             </div>
           </div>
