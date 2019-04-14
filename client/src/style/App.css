@@ -10,9 +10,7 @@
   --decorationColor: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff);
   --bigFont: 20px;
 }
-#root {
-  overflow-x: hidden;
-}
+
 .usernameDiv {
   margin: 300px auto;
   width: 225px;
@@ -62,7 +60,7 @@ body {
   height: 100%;
   position: fixed;
   padding: 0px 0px;
-  border: 1px solid var(--boader);
+  border-right: solid 1px var(--boader);
 }
 .usersOnlineDiv {
   padding-top: 150px;
@@ -79,6 +77,7 @@ body {
   max-width: 35%;
   height: 150px;
   padding: 0px 15px;
+  background: var(--decorationColor);
   border-bottom-color: var(--boader);
   border-bottom-style: solid;
   border-bottom-width: 1px;
@@ -86,8 +85,7 @@ body {
 
 .usersOnline:hover {
   background-color: var(--hoverColour);
-  border-right: solid 3px orange;
-  box-shadow: var(--boxShadow1);
+  border-right: solid 3px #ff4b01;
 }
 
 /* Search */
@@ -100,11 +98,14 @@ input:focus {
   width: 100%;
   padding: 15px 0px;
 }
-
+.searchContainer input::placeholder {
+  color: var(--boader);
+}
 .searchContainer input {
   border: none;
   width: 100%;
-  padding: 8px 25px;
+  padding: 10px 35px;
+  font-size: 18px;
   border-radius: 25px;
   box-sizing: border-box;
   color: var(--normalTextColour);
@@ -116,7 +117,8 @@ input:focus {
 
 .inputContainer svg {
   position: absolute;
-  padding: 6px 5px;
+  padding: 8px 7px;
+  font-size: 25px;
 }
 
 svg {
@@ -131,11 +133,14 @@ svg {
 
 .userInfoContainer svg {
   position: absolute;
+  font-size: 30px;
 }
 
 .userInfoContainer p {
   color: var(--normalTextColour);
-  padding: 0px 25px;
+  font-size: var(--bigFont);
+  padding: 0px 35px;
+  color: var(--bgColour);
 }
 
 .usersOnline img {
@@ -147,7 +152,45 @@ svg {
   margin: 5px 0px;
   color: var(--normalTextColour);
 }
+.container {
+  background-color: red;
+}
+.dropzone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+  padding: 20px 20px 20px 30px;
+  border-width: 2px;
+  border-radius: 2px;
+  border-color: var(--iconColour);
+  border-style: dashed;
+  background: var(--decorationColor);
+  color: var(--bgColour);
+  outline: none;
+  position: fixed;
+  width: 60%;
+  bottom: 45%;
 
+  z-index: 10;
+  transition: border 0.24s ease-in-out;
+}
+.dropDivGb {
+  background-color: var(--lightText);
+}
+.dropDiv {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  bottom: 60px;
+}
+.messageInfo {
+  width: 100%;
+  height: 90%;
+  overflow-y: scroll;
+  padding: 60px 0px;
+}
 .chatMessage {
   font-size: 15px;
   color: var(--lightText);
@@ -172,7 +215,6 @@ svg {
   min-width: 400px;
   max-width: 72%;
   height: 60px;
-  border-left: solid 1px var(--boader);
   border-top: solid 1px var(--boader);
 }
 
@@ -186,9 +228,11 @@ svg {
   border: solid 0px;
   font-size: var(--bigFont);
 }
+
 .sendMessage button:hover {
   cursor: pointer;
 }
+
 .sendMessage button {
   font-size: var(--bigFont);
   height: inherit;
@@ -200,6 +244,7 @@ svg {
   background: var(--decorationColor);
   color: var(--bgColour);
 }
+
 .sendMessage button:disabled {
   background: var(--boader);
   cursor: default;
@@ -207,12 +252,15 @@ svg {
 }
 
 .chatInfo {
+  z-index: 1;
   position: fixed;
-  width: 100vh;
   min-width: 400px;
+  box-sizing: border-box;
   height: 60px;
-  box-shadow: var(--boxShadow1);
-  background: var(--decorationColor);
+  padding-right: 400px;
+  width: 100%;
+  background-color: var(--bgColour);
+  border-bottom: solid 1px var(--boader);
 }
 
 /* Info Grid */
@@ -230,7 +278,7 @@ svg {
 }
 .userChatInfo p {
   margin-top: 15px;
-  color: var(--bgColour);
+  color: var(--normalTextColour);
   padding-left: 70px;
   font-size: var(--bigFont);
 }
@@ -250,11 +298,10 @@ svg {
 .messageDiv {
   display: grid;
   width: 300px;
-  grid-template-columns: auto 80% 20%;
+  grid-template-columns: 20% 80%;
   padding: 20px;
 }
 .messageDiv p {
-  background-color: green;
 }
 
 .messageDiv img {

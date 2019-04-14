@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Accept } from './dropFile.jsx'
 import { Person, Search, CameraAlt, Videocam } from '@material-ui/icons'
 import socketIOClient from 'socket.io-client'
 const url = 'http://localhost:8080'
@@ -10,7 +11,8 @@ export default class Chat extends Component {
       username: this.props.username,
       message: '',
       socket: '',
-      messages: []
+      messages: [],
+      fileUpload: false
     }
   }
   componentWillMount = () => {
@@ -39,10 +41,11 @@ export default class Chat extends Component {
     console.log(messages)
     const mes = messages.map(message => (
       <div class="messageDiv">
-        <img src={require('../photos/userPic.png')} alt="lol" />
-        {/* <p> {message.sender}</p> */}
-        <p> {message.message}</p>
-        <small> {message.date}</small>
+        <img title={message.sender} src={require('../photos/userPic.png')} />
+        <div>
+          <p> {message.message}</p>
+          <small> {message.date}</small>
+        </div>
       </div>
     ))
     return mes
@@ -72,7 +75,7 @@ export default class Chat extends Component {
   }
 
   render() {
-    const { message } = this.state
+    const { message, fileUpload } = this.state
     return (
       <div class="body">
         <div class="userDiv">
@@ -87,7 +90,7 @@ export default class Chat extends Component {
               <div class="searchContainer">
                 <div class="inputContainer">
                   <Search fontSize="small" />
-                  <input type="text" />
+                  <input type="text" placeholder="Search users..." />
                 </div>
               </div>
             </div>
@@ -110,14 +113,27 @@ export default class Chat extends Component {
                 <img src={require('../photos/userPic.png')} alt="lol" />
                 <p>James Bond</p>
               </div>
-              <CameraAlt onClick={this.camera} />
+              <CameraAlt
+                onClick={() => {
+                  this.setState({ fileUpload: !fileUpload })
+                }}
+              />
               <Videocam onClick={this.video} />
             </div>
           </div>
-          <div class="messageInfo" />
-          <this.Messages />
+          <div class="messageInfo">
+            <this.Messages />
+          </div>
+          <div
+            hidden={fileUpload ? false : true}
+            class={`dropDiv ${fileUpload ? 'dropDivGb' : null}`}
+          />
+          <div>{fileUpload ? <Accept /> : null}</div>
           <div class="sendMessage">
             <input
+              onDragEnter={e => {
+                this.setState({ fileUpload: true })
+              }}
               type="text"
               placeholder="Type a message..."
               onChange={e => {
