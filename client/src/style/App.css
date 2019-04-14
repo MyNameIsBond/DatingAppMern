@@ -164,7 +164,7 @@ svg {
   padding: 20px 20px 20px 30px;
   border-width: 2px;
   border-radius: 2px;
-  border-color: var(--iconColour);
+  border-color: var(--bgColour);
   border-style: dashed;
   background: var(--decorationColor);
   color: var(--bgColour);
