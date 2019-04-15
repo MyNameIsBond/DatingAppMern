@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 io.on('connection', socket => {
   socket.on('newUser', data => {
-    socket.broadcast.emit(data)
+    socket.broadcast.emit('newUser', data)
   })
   socket.on('messages', data => {
     io.sockets.emit('messages', data)

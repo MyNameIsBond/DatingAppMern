@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Accept } from './dropFile.jsx'
-import { Person, Search, CameraAlt, Videocam } from '@material-ui/icons'
+import { Search, CameraAlt, Videocam, Group } from '@material-ui/icons'
 import socketIOClient from 'socket.io-client'
 const url = 'http://localhost:8080'
 const socket = socketIOClient(url)
@@ -12,6 +12,7 @@ export default class Chat extends Component {
       message: '',
       socket: '',
       messages: [],
+      users: [],
       fileUpload: false
     }
   }
@@ -29,6 +30,9 @@ export default class Chat extends Component {
   componentDidMount = () => {
     socket.on('newUser', data => {
       console.log(data)
+      const { users } = this.state
+      const nUsers = [...users, data]
+      this.setState({ users: nUsers })
     })
     socket.on('messages', message => {
       const { messages } = this.state
@@ -66,16 +70,33 @@ export default class Chat extends Component {
     this.setState({ message: '' })
   }
 
-  camera = () => {
-    console.log('camera')
-  }
-
   video = () => {
     console.log('video')
   }
 
+  Users = () => {
+    const { users } = this.state
+    const usersS = users.map(user => (
+      <div class="usersOnline">
+        <img src={require(`../photos/${user.username}.png`)} />
+        <div>
+          <h4 class="chatName">{user.username}</h4>
+          <p class="chatMessage">Online now</p>
+        </div>
+      </div>
+    ))
+    return usersS
+  }
+
+  NoUser = () => (
+    <div class="noUsersOnline">
+      <Group />
+      <p>No users online</p>
+    </div>
+  )
+
   render() {
-    const { message, fileUpload, username } = this.state
+    const { message, fileUpload, username, users } = this.state
     return (
       <div class="body">
         <div class="userDiv">
@@ -90,19 +111,11 @@ export default class Chat extends Component {
               <div class="searchContainer">
                 <div class="inputContainer">
                   <Search fontSize="small" />
-                  <input type="text" placeholder="Search users..." />
+                  <input type="text" placeholder="Search for users..." />
                 </div>
               </div>
             </div>
-            <div class="usersOnlineDiv">
-              <div class="usersOnline">
-                <img src={require('../photos/userPic.png')} alt="lol" />
-                <div>
-                  <h4 class="chatName">Dolores La Flipo</h4>
-                  <p class="chatMessage">Hello there</p>
-                </div>
-              </div>
-            </div>
+            <div class="usersOnlineDiv">{!users.length ? <this.NoUser /> : <this.Users />}</div>
           </div>
         </div>
         {/* Chat Grid */}
