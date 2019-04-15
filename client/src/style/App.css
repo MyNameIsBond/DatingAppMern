@@ -167,9 +167,13 @@ svg {
 .container {
   background-color: red;
 }
+.dropzone:hover {
+  cursor: pointer;
+}
 .dropzone {
   flex: 1;
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   align-items: center;
   margin-left: 10px;
