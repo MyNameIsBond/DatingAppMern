@@ -37,10 +37,10 @@ export default class Chat extends Component {
     })
   }
   Messages = () => {
-    const { messages } = this.state
-    console.log(messages)
+    const { messages, username } = this.state
+    console.log(username)
     const mes = messages.map(message => (
-      <div class="messageDiv">
+      <div class={username === message.sender ? 'recievedMessage' : 'messageDiv'}>
         <img title={message.sender} src={require('../photos/userPic.png')} />
         <div>
           <p> {message.message}</p>

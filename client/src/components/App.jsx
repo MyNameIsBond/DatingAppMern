@@ -38,7 +38,12 @@ class App extends Component {
             <h2>Welcome, give us your username</h2>
             <h2>{username ? username : 'username'}</h2>
             <div class="inputDiv">
-              <input type="text" onKeyPress={this.usernameFuncPress} onChange={this.usernameFunc} />
+              <input
+                type="text"
+                maxlength="15"
+                onKeyPress={this.usernameFuncPress}
+                onChange={this.usernameFunc}
+              />
             </div>
           </div>
         )}
