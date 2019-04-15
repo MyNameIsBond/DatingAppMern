@@ -128,18 +128,22 @@ svg {
 /*  Users Info */
 
 .userConainer {
-  margin: 10px 20px;
+  display: grid;
+  margin: 0px 20px;
 }
 
-.userInfoContainer svg {
+.userInfoContainer img {
+  height: 45px;
+  width: 45px;
+  margin-top: 15px;
+  border-radius: 100%;
   position: absolute;
-  font-size: 30px;
 }
 
 .userInfoContainer p {
   color: var(--normalTextColour);
   font-size: var(--bigFont);
-  padding: 0px 35px;
+  padding: 0px 0px 0px 60px;
   color: var(--bgColour);
 }
 
@@ -303,7 +307,6 @@ svg {
 }
 
 .messageDiv p {
-  /* max-width: 200px; */
   overflow-wrap: break-word;
   margin: 20px;
   padding: 0px;
@@ -327,20 +330,40 @@ svg {
 }
 .messageDiv img {
   height: 50px;
-  width: auto;
+  width: 50px;
+  border-radius: 100%;
 }
 
 .recievedMessage {
   display: grid;
   width: 300px;
-
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 20% minmax(100px, 80%);
   padding: 20px;
 }
+
 .recievedMessage p {
+  overflow-wrap: break-word;
+  margin: 20px;
+  padding: 0px;
+  align-self: center;
+  color: var(--bgColour);
+}
+.recievedMessage > div {
+  display: grid;
   background: var(--decorationColor);
+  border-radius: 0% 15px 15px 15px;
+  grid-template-rows: auto auto;
+  grid-template-columns: minmax(100px, auto);
+  box-shadow: var(--boxShadow1);
+}
+.recievedMessage > div > small {
+  justify-self: end;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  color: var(--bgColour);
 }
 .recievedMessage img {
   height: 50px;
-  width: auto;
+  width: 50px;
+  border-radius: 100%;
 }

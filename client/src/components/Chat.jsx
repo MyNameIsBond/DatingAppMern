@@ -41,7 +41,7 @@ export default class Chat extends Component {
     console.log(username)
     const mes = messages.map(message => (
       <div class={username === message.sender ? 'recievedMessage' : 'messageDiv'}>
-        <img title={message.sender} src={require('../photos/userPic.png')} />
+        <img title={message.sender} src={require(`../photos/${message.sender}.png`)} />
         <div>
           <p> {message.message}</p>
           <small> {message.date}</small>
@@ -75,7 +75,7 @@ export default class Chat extends Component {
   }
 
   render() {
-    const { message, fileUpload } = this.state
+    const { message, fileUpload, username } = this.state
     return (
       <div class="body">
         <div class="userDiv">
@@ -83,7 +83,7 @@ export default class Chat extends Component {
             <div class="userInfo">
               <div class="userConainer">
                 <div class="userInfoContainer">
-                  <Person />
+                  <img src={require(`../photos/${username}.png`)} alt="lol" />
                   <p>{this.props.username}</p>
                 </div>
               </div>
