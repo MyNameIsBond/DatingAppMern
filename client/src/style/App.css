@@ -3,12 +3,15 @@
   --normalTextColour: #424244;
   --boxShadow1: 0 2px 2px rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  --boder: lightgray;
+  --border: lightgray;
   --hoverColour: lightgray;
   --lightText: rgb(161, 161, 161);
-  --iconColour: rgb(72, 85, 90);
+  --iconColour: rgb(82, 82, 82);
   --decorationColor: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff);
   --bigFont: 20px;
+  --theme: rgb(212, 212, 47);
+  --textInDecoration: #ebebeb;
+  --singleDecorationColour: #ff4b01;
 }
 
 .usernameDiv {
@@ -57,7 +60,7 @@ body {
   height: 100%;
   position: fixed;
   padding: 0px 0px;
-  border-right: solid 1px var(--boder);
+  border-right: solid 1px var(--border);
 }
 .usersOnlineDiv {
   height: 100%;
@@ -76,14 +79,14 @@ body {
   height: 150px;
   padding: 0px 15px;
   background: var(--decorationColor);
-  border-bottom-color: var(--boder);
+  border-bottom-color: var(--border);
   border-bottom-style: solid;
   border-bottom-width: 1px;
 }
 
 .usersOnline:hover {
   background-color: var(--hoverColour);
-  border-right: solid 3px #ff4b01;
+  border-right: solid 3px var(--singleDecorationColour);
 }
 
 /* Search */
@@ -97,14 +100,16 @@ input:focus {
   padding: 15px 0px;
 }
 .searchContainer input::placeholder {
-  color: var(--boder);
+  color: var(--lightText);
 }
+
 .searchContainer input {
   border: none;
   width: 100%;
   padding: 10px 35px;
   font-size: 18px;
   border-radius: 25px;
+  background-color: var(--bgColour);
   box-sizing: border-box;
   color: var(--normalTextColour);
 }
@@ -116,6 +121,7 @@ input:focus {
 .inputContainer svg {
   position: absolute;
   padding: 8px 7px;
+
   font-size: 25px;
 }
 
@@ -128,6 +134,7 @@ svg {
   padding-top: 100px;
   text-align: center;
   height: 100%;
+  color: var(--normalTextColour);
 }
 .noUsersOnline svg {
   font-size: 100px;
@@ -135,27 +142,38 @@ svg {
   align-self: center;
 }
 .userConainer {
+  margin: 0px 0px;
+  height: 70px;
+}
+
+.userInfoContainer {
   display: grid;
-  margin: 0px 20px;
+  grid-template-columns: 20% 60% 20%;
 }
 
 .userInfoContainer img {
   height: 45px;
   width: 45px;
+  justify-self: center;
   margin-top: 15px;
+  grid-column: span 1;
   border-radius: 100%;
-  position: absolute;
+}
+.userInfoContainer svg {
+  place-self: center;
+  font-size: 35px;
+  color: var(--bgColour);
 }
 
 .userInfoContainer p {
-  color: var(--normalTextColour);
+  justify-self: center;
   font-size: var(--bigFont);
-  padding: 0px 0px 0px 60px;
-  color: var(--bgColour);
+  color: var(--textInDecoration);
 }
 
 .usersOnline img {
   border-radius: 100%;
+  justify-self: center;
   height: 80px;
   width: 80px;
 }
@@ -193,7 +211,7 @@ svg {
   transition: border 0.24s ease-in-out;
 }
 .dropDivGb {
-  background-color: var(--lightText);
+  background-color: var(--border);
 }
 .dropDiv {
   height: 100%;
@@ -231,7 +249,7 @@ svg {
   min-width: 400px;
   max-width: 72%;
   height: 60px;
-  border-top: solid 1px var(--boder);
+  border-top: solid 1px var(--border);
 }
 
 .sendMessage input {
@@ -258,11 +276,11 @@ svg {
   border: solid 0px;
   padding: auto 0px;
   background: var(--decorationColor);
-  color: var(--bgColour);
+  color: var(--textInDecoration);
 }
 
 .sendMessage button:disabled {
-  background: var(--boder);
+  background: var(--border);
   cursor: default;
   color: var(--iconColour);
 }
@@ -276,7 +294,7 @@ svg {
   padding-right: 400px;
   width: 100%;
   background-color: var(--bgColour);
-  border-bottom: solid 1px var(--boder);
+  border-bottom: solid 1px var(--border);
 }
 
 /* Info Grid */
@@ -328,7 +346,7 @@ svg {
 }
 .messageDiv > div {
   display: grid;
-  background-color: var(--boder);
+  background-color: var(--border);
   border-radius: 0% 15px 15px 15px;
   grid-template-rows: auto auto;
   grid-template-columns: minmax(100px, auto);
@@ -353,13 +371,16 @@ svg {
   padding: 20px;
   padding-left: 50%;
 }
+.CTE--text {
+  white-space: inherit !important;
+}
 
 .recievedMessage p {
   overflow-wrap: break-word;
   margin: 20px;
   padding: 0px;
-  justify-self: end;
-  color: var(--bgColour);
+  justify-self: start;
+  color: var(--textInDecoration);
 }
 .recievedMessage > div {
   display: grid;
@@ -372,9 +393,6 @@ svg {
 }
 .recievedMessage > div > small {
   justify-self: start;
-  color: var(--bgColour);
-  padding-left: 10px;
-  padding-bottom: 10px;
 }
 .recievedMessage img {
   justify-self: end;
@@ -383,4 +401,25 @@ svg {
   height: 50px;
   width: 50px;
   border-radius: 100%;
+}
+.messageItems {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 5px;
+}
+.messageItems small {
+  place-self: center;
+  padding-right: 50px;
+  color: var(--lightText);
+}
+.messageItems svg {
+  cursor: pointer;
+  padding-left: 50px;
+
+  place-self: center;
+}
+
+.loading {
+  justify-self: end;
+  padding-right: 20px;
 }

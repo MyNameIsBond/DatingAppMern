@@ -21,4 +21,7 @@ io.on('connection', socket => {
   socket.on('messages', data => {
     io.sockets.emit('messages', data)
   })
+  socket.on('onEdit', data => {
+    socket.broadcast.emit('onEdit', data)
+  })
 })
