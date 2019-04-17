@@ -33,7 +33,8 @@ export default class Chat extends Component {
       messages: [],
       users: [],
       fileUpload: false,
-      theme: true
+      theme: true,
+      loading: false
     }
   }
   componentWillMount = () => {
@@ -77,15 +78,26 @@ export default class Chat extends Component {
   }
 
   TextMessage = props => {
-    const { username } = this.state
+    const { username, messages } = this.state
     const { message, value } = props
+
     return (
-      <div value={value} class={username === message.sender ? 'recievedMessage' : 'messageDiv'}>
+      <div
+        value={value}
+        onDoubleClick={e => {
+          if (e.shiftKey && message.sender === username) {
+            messages.splice(value, 1)
+            this.setState({ messages: messages })
+            socket.emit('onEdit', messages)
+          }
+        }}
+        class={username === message.sender ? 'recievedMessage' : 'messageDiv'}
+      >
         <img title={message.sender} src={require(`../photos/${message.sender}.png`)} />
         <div
           title={
             username === message.sender
-              ? `double click to delete: ${message.message}`
+              ? `shift + double click to delete: ${message.message}`
               : `${message.message}`
           }
         >
@@ -195,13 +207,22 @@ export default class Chat extends Component {
     }
   }
   VideoMessage = props => {
-    const { username } = this.state
+    const { username, messages } = this.state
     const { message, value } = props
     return (
-      <div class={username === message.sender ? 'sendVideo' : 'recieveVideo'}>
+      <div
+        onDoubleClick={e => {
+          if (e.shiftKey && message.sender === username) {
+            messages.splice(value, 1)
+            this.setState({ messages: messages })
+            socket.emit('onEdit', messages)
+          }
+        }}
+        class={username === message.sender ? 'sendVideo' : 'recieveVideo'}
+      >
         <img title={message.sender} src={require(`../photos/${message.sender}.png`)} />
         <ReactPlayer
-        className='player'
+          className="player"
           url={message.url}
           onStart={() => {
             this.setState({
@@ -272,6 +293,8 @@ export default class Chat extends Component {
         '--decorationColor',
         'linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff)'
       )
+      doc.setProperty('--recieveMessageColour', '#d84315')
+
       this.setState({ theme: true })
     } else {
       // Dark Theme
@@ -287,6 +310,8 @@ export default class Chat extends Component {
         '--decorationColor',
         'linear-gradient(139deg, #1DE9B6,#00695C, #004D40,#00796B)'
       )
+      doc.setProperty('--recieveMessageColour', '#009688')
+
       this.setState({ theme: false })
     }
   }

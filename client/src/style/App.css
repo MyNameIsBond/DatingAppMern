@@ -12,6 +12,8 @@
   --theme: rgb(212, 212, 47);
   --textInDecoration: #ebebeb;
   --singleDecorationColour: #ff4b01;
+  --recieveMessageColour: #d84315;
+  --timeColour: #bdbdbd;
 }
 
 .usernameDiv {
@@ -224,6 +226,7 @@ svg {
   height: 90%;
   overflow-y: scroll;
   padding: 60px 0px;
+  overflow-x: hidden;
 }
 .chatMessage {
   font-size: 15px;
@@ -385,7 +388,7 @@ svg {
 .recievedMessage > div {
   display: grid;
   grid-column: span 1;
-  background: var(--decorationColor);
+  background: var(--recieveMessageColour);
   border-radius: 15px 0px 15px 15px;
   grid-template-rows: auto auto;
   grid-template-columns: minmax(100px, auto);
@@ -431,7 +434,7 @@ svg {
 .recieveVideo {
   display: grid;
   width: 80%;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 11% 80%;
 }
 
 .sendVideo img {
@@ -453,4 +456,10 @@ svg {
   justify-self: center;
   grid-column: 1;
   grid-row: 1;
+}
+
+.recieveVideo,
+.sendVideo {
+  padding-bottom: 15px;
+  padding-top: 15px;
 }

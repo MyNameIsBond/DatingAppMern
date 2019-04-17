@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 export function Accept(props) {
-  const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isDragAccept,
+    isDragReject,
+    acceptedFiles
+  } = useDropzone({
     accept: 'image/jpeg, image/png'
   })
-
   return (
     <div className="container">
       <div {...getRootProps({ className: 'dropzone' })}>
