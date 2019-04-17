@@ -73,6 +73,8 @@ export default class Chat extends Component {
           return <this.TextMessage message={message} value={i} />
         case 'video':
           return <this.VideoMessage message={message} value={i} />
+        case 'picture':
+          return <this.PictureMessage message={message} value={i} />
       }
     })
     return mes
@@ -167,19 +169,30 @@ export default class Chat extends Component {
       </div>
     )
   }
-
   sendMessageEnter = e => {
     if (e.key === 'Enter') {
       this.sendMessage()
     }
   }
   sendMessage = () => {
-    const { username, message } = this.state
+    const { username, message, newPicture } = this.state
     const currentDate = new Date()
     const hour = currentDate.getHours()
     const minute = currentDate.getMinutes()
     const datee = `${hour}:${minute}`
-    if (isUrl(message)) {
+    if (this.state.newPicture !== false) {
+      socket.emit('messages', {
+        condition: 'picture',
+        sender: username,
+        message: message,
+        url: newPicture,
+        date: datee,
+        loading: false,
+        locked: false
+      })
+      this.setState({ newPicture: false })
+      this.setState({ message: '' })
+    } else if (isUrl(message)) {
       socket.emit('messages', {
         condition: 'video',
         sender: username,
@@ -256,7 +269,26 @@ export default class Chat extends Component {
       </div>
     )
   }
-
+  PictureMessage = props => {
+    const { username, messages } = this.state
+    const { message, value } = props
+    return (
+      <div
+        onDoubleClick={e => {
+          if (e.shiftKey && message.sender === username) {
+            messages.splice(value, 1)
+            this.setState({ messages: messages })
+            socket.emit('onEdit', messages)
+          }
+        }}
+        class={message.sender === username ? 'sendPicture' : 'recievePic'}
+      >
+        <img class="sendPic" src={message.url} />
+        <img class="userPic" src={require(`../photos/${message.sender}.png`)} />
+        <small>{message.message}</small>
+      </div>
+    )
+  }
   Users = () => {
     const { users } = this.state
     const usersS = users.map(user => (
@@ -332,7 +364,9 @@ export default class Chat extends Component {
     acceptedFiles.forEach(async file => {
       data.append('files', file)
       const res = await axios.post('/picture', data)
+      this.setState({ fileUpload: false })
       this.setState({ newPicture: res.data.path })
+      this.setState({ message: file.path })
     })
     return (
       <div className="container">
@@ -347,9 +381,41 @@ export default class Chat extends Component {
   }
 
   NewPicture = () => {
+    const { loading, newPicture } = this.state
     return (
       <div class="newPicture">
-        <img src={this.state.newPicture} />
+        {loading ? <p>loading</p> : <img src={newPicture} />}
+        <button
+          class="cancel"
+          onClick={() => {
+            this.setState({ newPicture: false })
+            this.setState({ message: '' })
+          }}
+        >
+          cancel
+        </button>
+        <button
+          class="send"
+          onClick={() => {
+            const { username, message } = this.state
+            const currentDate = new Date()
+            const hour = currentDate.getHours()
+            const minute = currentDate.getMinutes()
+            const datee = `${hour}:${minute}`
+            socket.emit('messages', {
+              condition: 'picture',
+              sender: username,
+              message: message,
+              url: newPicture,
+              date: datee,
+              loading: false
+            })
+            this.setState({ newPicture: false })
+            this.setState({ message: '' })
+          }}
+        >
+          send
+        </button>
       </div>
     )
   }

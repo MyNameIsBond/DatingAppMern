@@ -336,7 +336,7 @@ svg {
   display: grid;
   width: 300px;
   grid-template-columns: 20% minmax(100px, 80%);
-  padding: 20px;
+  padding: 20px 17px;
 }
 
 .messageDiv p {
@@ -344,7 +344,6 @@ svg {
   margin: 20px;
   padding: 0px;
   align-self: center;
-
   color: var(--normalTextColour);
 }
 .messageDiv > div {
@@ -370,7 +369,7 @@ svg {
 .recievedMessage {
   display: grid;
   width: 300px;
-  grid-template-columns: minmax(100px, 80%) 20%;
+  grid-template-columns: 81% 22%;
   padding: 20px;
   padding-left: 500px;
 }
@@ -429,7 +428,7 @@ svg {
   padding-left: 325px;
   display: grid;
   width: 500px;
-  grid-template-columns: 80% 20%;
+  grid-template-columns: 86% 12%;
 }
 .recieveVideo {
   display: grid;
@@ -464,13 +463,109 @@ svg {
   padding-top: 15px;
 }
 
-.newPicture img {
-  height: auto;
-  margin: auto auto;
-  width: 100%;
-}
 .newPicture {
   position: absolute;
-  top: 20%;
-  background-color: red;
+  top: 30%;
+  padding: 20px 100px;
+  background-color: lightgray;
+  box-shadow: var(--boxShadow1);
+  margin: 15px;
+  height: 400px;
+  width: 520px;
+}
+
+.newPicture img {
+  margin: 0px 0px 0px -54px;
+  height: auto;
+  max-height: 350px;
+  width: 600px;
+}
+.newPicture .send {
+  margin: 10px;
+  font-size: 16px;
+  padding: 5px 15px;
+  border: 1px solid var(--lightText);
+  border-radius: 5px;
+  background: none;
+  cursor: pointer;
+  color: var(--recieveMessageColour);
+}
+.newPicture .send:hover {
+  color: var(--textInDecoration);
+  background-color: var(--recieveMessageColour);
+  border: 1px solid var(--recieveMessageColour);
+}
+
+.newPicture .cancel {
+  margin: 10px;
+  font-size: 16px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background: none;
+  cursor: pointer;
+  border: solid 1px lightgray;
+  color: var(--lightText);
+}
+.newPicture .cancel:hover {
+  border: solid 1px var(--lightText);
+}
+
+.sendPicture {
+  display: grid;
+  padding: 5px 250px;
+  grid-template-columns: 82% 15%;
+  grid-template-rows: auto;
+  width: 600px;
+}
+
+.sendPicture .sendPic {
+  height: auto;
+  max-height: 250px;
+  width: 400px;
+  justify-self: end;
+}
+
+.sendPicture .userPic {
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  justify-self: center;
+}
+.sendPicture small {
+  justify-self: end;
+  color: var(--lightText);
+}
+
+/* ------------- */
+
+.recievePic {
+  display: grid;
+  padding: 5px 0px;
+  grid-template-columns: 12% 80%;
+  grid-template-rows: auto;
+  width: 600px;
+}
+
+.recievePic .sendPic {
+  grid-column: 2;
+  grid-row: 1;
+  height: auto;
+  max-height: 250px;
+  width: 400px;
+  justify-self: start;
+}
+
+.recievePic .userPic {
+  grid-column: 1;
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  justify-self: end;
+  margin: 0px 8px;
+}
+.recievePic small {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+  color: var(--lightText);
 }
