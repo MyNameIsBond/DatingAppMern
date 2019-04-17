@@ -369,7 +369,7 @@ svg {
   width: 300px;
   grid-template-columns: minmax(100px, 80%) 20%;
   padding: 20px;
-  padding-left: 50%;
+  padding-left: 500px;
 }
 .CTE--text {
   white-space: inherit !important;
@@ -415,11 +415,42 @@ svg {
 .messageItems svg {
   cursor: pointer;
   padding-left: 50px;
-
   place-self: center;
 }
 
 .loading {
   justify-self: end;
   padding-right: 20px;
+}
+.sendVideo {
+  padding-left: 325px;
+  display: grid;
+  width: 500px;
+  grid-template-columns: 80% 20%;
+}
+.recieveVideo {
+  display: grid;
+  width: 80%;
+  grid-template-columns: 20% 80%;
+}
+
+.sendVideo img {
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  justify-self: center;
+  grid-column: 2;
+  greid-row: 1;
+}
+.recieveVideo img {
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  justify-self: center;
+}
+
+.sendVideo .player {
+  justify-self: center;
+  grid-column: 1;
+  grid-row: 1;
 }

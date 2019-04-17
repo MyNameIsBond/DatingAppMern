@@ -49,7 +49,6 @@ export default class Chat extends Component {
 
   componentDidMount = () => {
     socket.on('newUser', data => {
-      console.log(data)
       const { users } = this.state
       const nUsers = [...users, data]
       this.setState({ users: nUsers })
@@ -61,19 +60,17 @@ export default class Chat extends Component {
     })
 
     socket.on('onEdit', edited => {
-      console.log(edited)
       this.setState({ messages: edited })
     })
   }
   Messages = () => {
     const { messages, username } = this.state
-    console.log(username)
     const mes = messages.map((message, i) => {
       switch (message.condition) {
         case 'message':
           return <this.TextMessage message={message} value={i} />
         case 'video':
-          return <this.TextMessage message={message} value={i} />
+          return <this.VideoMessage message={message} value={i} />
       }
     })
     return mes
@@ -197,8 +194,45 @@ export default class Chat extends Component {
       this.sendMessage()
     }
   }
-  VideoMessage = () => {
-
+  VideoMessage = props => {
+    const { username } = this.state
+    const { message, value } = props
+    return (
+      <div class={username === message.sender ? 'sendVideo' : 'recieveVideo'}>
+        <img title={message.sender} src={require(`../photos/${message.sender}.png`)} />
+        <ReactPlayer
+        className='player'
+          url={message.url}
+          onStart={() => {
+            this.setState({
+              messages: update(this.state.messages, {
+                [`${value}`]: { playing: { $set: true } }
+              })
+            })
+            socket.emit('onEdit', this.state.messages)
+          }}
+          onPlay={() => {
+            this.setState({
+              messages: update(this.state.messages, {
+                [`${value}`]: { playing: { $set: true } }
+              })
+            })
+            socket.emit('onEdit', this.state.messages)
+          }}
+          onPause={() => {
+            this.setState({
+              messages: update(this.state.messages, {
+                [`${value}`]: { playing: { $set: false } }
+              })
+            })
+            socket.emit('onEdit', this.state.messages)
+          }}
+          playing={message.playing}
+          height="200px"
+          width="400px"
+        />
+      </div>
+    )
   }
 
   Users = () => {
