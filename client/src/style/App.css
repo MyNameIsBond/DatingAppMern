@@ -463,3 +463,14 @@ svg {
   padding-bottom: 15px;
   padding-top: 15px;
 }
+
+.newPicture img {
+  height: auto;
+  margin: auto auto;
+  width: 100%;
+}
+.newPicture {
+  position: absolute;
+  top: 20%;
+  background-color: red;
+}

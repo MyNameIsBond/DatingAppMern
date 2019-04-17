@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 const port = 8080
+const fs = require('fs')
+const path = require('path')
+app.use('/static', express.static(path.join(__dirname, 'static')))
 // Sockets
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
@@ -9,7 +12,7 @@ app.use((req, res, next) => {
 })
 const multer = require('multer')
 const storage = multer.diskStorage({
-  destination: './route/uploads',
+  destination: './static/uploads',
   filename: function(req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
   }
@@ -54,4 +57,8 @@ io.on('connection', socket => {
   })
 })
 
-app.post('/picture')
+app.post('/picture', upload.array('files', 10), (req, res) => {
+  let files = req.files
+  console.log(files[0].path)
+  return res.send({ path: files[0].path })
+})

@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { css } from '@emotion/core'
 import { ClipLoader } from 'react-spinners'
 import isUrl from 'is-url'
-import { Accept } from './dropFile.jsx'
 import ReactPlayer from 'react-player'
+import { useDropzone } from 'react-dropzone'
+import axios from 'axios'
 import {
   Search,
   CameraAlt,
@@ -20,7 +21,6 @@ import translate from 'translate'
 translate.engine = 'yandex'
 translate.key =
   'trnsl.1.1.20190416T055045Z.8cfbe4ca823ac3e3.ee12f4989798a0b3a198c0291000620690146c67'
-
 const url = 'http://localhost:8080'
 const socket = socketIOClient(url)
 export default class Chat extends Component {
@@ -34,7 +34,8 @@ export default class Chat extends Component {
       users: [],
       fileUpload: false,
       theme: true,
-      loading: false
+      loading: false,
+      newPicture: false
     }
   }
   componentWillMount = () => {
@@ -316,8 +317,44 @@ export default class Chat extends Component {
     }
   }
 
+  Accept = () => {
+    const {
+      getRootProps,
+      getInputProps,
+      isDragActive,
+      isDragAccept,
+      isDragReject,
+      acceptedFiles
+    } = useDropzone({
+      accept: 'image/jpeg, image/png'
+    })
+    const data = new FormData()
+    acceptedFiles.forEach(async file => {
+      data.append('files', file)
+      const res = await axios.post('/picture', data)
+      this.setState({ newPicture: res.data.path })
+    })
+    return (
+      <div className="container">
+        <div {...getRootProps({ className: 'dropzone' })}>
+          <input {...getInputProps()} />
+          {isDragAccept && <p>All files will be accepted</p>}
+          {isDragReject && <p>Some files will be rejected</p>}
+          {!isDragActive && <p>Drop some files here ...</p>}
+        </div>
+      </div>
+    )
+  }
+
+  NewPicture = () => {
+    return (
+      <div class="newPicture">
+        <img src={this.state.newPicture} />
+      </div>
+    )
+  }
   render() {
-    const { message, fileUpload, username, users, theme } = this.state
+    const { message, fileUpload, username, users, theme, newPicture } = this.state
     return (
       <div class="body">
         <div class="userDiv">
@@ -367,7 +404,8 @@ export default class Chat extends Component {
             hidden={fileUpload ? false : true}
             class={`dropDiv ${fileUpload ? 'dropDivGb' : null}`}
           />
-          <div>{fileUpload ? <Accept /> : null}</div>
+          <div>{fileUpload ? <this.Accept /> : null}</div>
+          {newPicture ? <this.NewPicture /> : null}
           <div class="sendMessage">
             <input
               onDragEnter={e => {
