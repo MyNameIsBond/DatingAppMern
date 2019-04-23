@@ -376,7 +376,9 @@ svg {
 .CTE--text {
   white-space: inherit !important;
 }
-
+.recievedMessage > div:hover {
+  cursor: pointer;
+}
 .recievedMessage p {
   overflow-wrap: break-word;
   margin: 20px;
@@ -465,7 +467,7 @@ svg {
 
 .newPicture {
   position: absolute;
-  top: 30%;
+  bottom: 100px;
   padding: 20px 100px;
   background-color: lightgray;
   box-shadow: var(--boxShadow1);
@@ -568,4 +570,19 @@ svg {
   grid-row: 2;
   justify-self: start;
   color: var(--lightText);
+}
+
+.lockPicDiv {
+  box-shadow: var(--boxShadow1);
+  position: absolute;
+  background-color: var(--hoverColour);
+  padding: 10px;
+  margin: 180px 40px 0px 0px;
+  border-radius: 100%;
+  right: 100px;
+  cursor: pointer;
+}
+
+.lockedPic {
+  filter: blur(15px);
 }

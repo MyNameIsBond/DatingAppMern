@@ -12,7 +12,9 @@ import {
   Group,
   WbSunny,
   Brightness3,
-  Translate
+  Translate,
+  LockOpen,
+  Lock
 } from '@material-ui/icons'
 import update from 'react-addons-update'
 import ClickToEdit from 'react-click-to-edit'
@@ -50,6 +52,10 @@ export default class Chat extends Component {
   }
 
   componentDidMount = () => {
+    socket.on('videoStart', data => {
+      alert('A video will be played...')
+      this.setState({ messages: data })
+    })
     socket.on('newUser', data => {
       const { users } = this.state
       const nUsers = [...users, data]
@@ -138,7 +144,7 @@ export default class Chat extends Component {
                             [`${value}`]: { loading: { $set: true } }
                           })
                         })
-                        const text = await translate(`${message.message}`, 'pt')
+                        const text = await translate(`${message.message}`, 'el')
                         this.setState({
                           messages: update(this.state.messages, {
                             [`${value}`]: { message: { $set: text } }
@@ -244,7 +250,7 @@ export default class Chat extends Component {
                 [`${value}`]: { playing: { $set: true } }
               })
             })
-            socket.emit('onEdit', this.state.messages)
+            socket.emit('videoStart', this.state.messages)
           }}
           onPlay={() => {
             this.setState({
@@ -283,8 +289,33 @@ export default class Chat extends Component {
         }}
         class={message.sender === username ? 'sendPicture' : 'recievePic'}
       >
-        <img class="sendPic" src={message.url} />
+        {message.locked ? (
+          <img class="sendPic lockedPic" src={message.url} />
+        ) : (
+          <img class="sendPic" src={message.url} />
+        )}
         <img class="userPic" src={require(`../photos/${message.sender}.png`)} />
+        {message.sender === username ? (
+          <div
+            class="lockPicDiv"
+            onClick={() => {
+              const mes = this.state.messages[`${value}`].locked
+              console.log(mes)
+              this.setState(
+                {
+                  messages: update(messages, {
+                    [`${value}`]: { locked: { $set: !mes } }
+                  })
+                },
+                () => {
+                  socket.emit('onEdit', this.state.messages)
+                }
+              )
+            }}
+          >
+            <div>{message.locked ? <Lock /> : <LockOpen />}</div>
+          </div>
+        ) : null}
         <small>{message.message}</small>
       </div>
     )
@@ -408,7 +439,9 @@ export default class Chat extends Component {
               message: message,
               url: newPicture,
               date: datee,
-              loading: false
+              loading: false,
+              lockPic: false,
+              locked: false
             })
             this.setState({ newPicture: false })
             this.setState({ message: '' })

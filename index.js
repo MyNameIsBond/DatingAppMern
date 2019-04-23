@@ -55,6 +55,9 @@ io.on('connection', socket => {
   socket.on('onEdit', data => {
     socket.broadcast.emit('onEdit', data)
   })
+  socket.on('videoStart', data => {
+    socket.broadcast.emit('onEdit', data)
+  })
 })
 
 app.post('/picture', upload.array('files', 10), (req, res) => {
